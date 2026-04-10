@@ -436,6 +436,48 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    html { font-size: 13px; }
+
+    .page { padding: 1.5rem 1.25rem 3rem; }
+
+    /* header — стопим в столбик */
+    .header {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .contacts { text-align: left; }
+
+    .name { font-size: 2.4rem; }
+
+    /* job — стопим мету и контент */
+    .job {
+      grid-template-columns: 1fr;
+      gap: .5rem;
+    }
+    .job-meta { padding-top: 0; }
+    .job-period { font-size: .85rem; }
+
+    /* projects — одна колонка */
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    .project-card.wide {
+      grid-column: span 1;
+    }
+
+    /* stack — одна колонка */
+    .stack-groups {
+      grid-template-columns: 1fr;
+    }
+
+    /* education — одна колонка */
+    .meta-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   @media print {
     body { background: #fff; color: #111; }
     body::before { display: none; }
