@@ -72,6 +72,24 @@
     color: var(--accent);
   }
 
+  .header-right {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 1.25rem;
+  }
+
+  .avatar {
+    width: 82px;
+    height: 82px;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center top;
+    border: 0.5px solid var(--border2);
+    filter: grayscale(15%);
+    display: block;
+  }
+
   .contacts {
     text-align: right;
     font-size: .78rem;
@@ -455,8 +473,10 @@
 
     .page { padding: 1.5rem 1.1rem 2.5rem; }
 
-    /* header — контакты уходят вниз */
+    /* header */
     .header { grid-template-columns: 1fr; gap: .85rem; }
+    .header-right { align-items: flex-start; }
+    .avatar { width: 60px; height: 60px; }
     .contacts { text-align: left; line-height: 1.75; }
     .name { font-size: 2.2rem; }
 
@@ -506,6 +526,7 @@
       --text: #111; --muted: #666; --dim: #999;
       --accent: #3a7d00; --accent2: #1040a0;
     }
+    .avatar { display: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .section-line { transform: scaleX(1); transition: none; }
     .project-card:hover { transform: none; box-shadow: none; }
@@ -524,11 +545,13 @@
         Python Backend Developer · <span>Tech Lead</span>
       </div>
     </div>
-    <div class="contacts">
-      <div>+7 (771) 464-87-17</div>
-      <div><a href="mailto:roman_lebedev91@mail.ru">roman_lebedev91@mail.ru</a></div>
-      <div><a href="https://t.me/RomanL1991" class="site">@RomanL1991</a></div>
-      <!-- <div>Казахстан · удалённо</div> -->
+    <div class="header-right">
+      <div class="contacts">
+        <div>+7 (771) 464-87-17</div>
+        <div><a href="mailto:roman_lebedev91@mail.ru">roman_lebedev91@mail.ru</a></div>
+        <div><a href="https://t.me/RomanL1991" class="site">@RomanL1991</a></div>
+      </div>
+      <img src="portret.png" class="avatar" alt="Лебедев Роман">
     </div>
   </header>
 
