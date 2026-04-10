@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лебедев Роман — Python Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #0e0f11;
+    --surface:  #141518;
+    --border:   #1f2025;
+    --border2:  #2a2b31;
+    --text:     #e8e9ec;
+    --muted:    #7b7d85;
+    --dim:      #3d3f47;
+    --accent:   #c8f07b;
+    --accent2:  #6ea8fe;
+    --serif:    'DM Serif Display', Georgia, serif;
+    --sans:     'DM Sans', system-ui, sans-serif;
+    --mono:     'DM Mono', 'Courier New', monospace;
+  }
+
+  html { font-size: 14px; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 4rem;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+    padding-bottom: 2rem;
+    border-bottom: 0.5px solid var(--border2);
+    margin-bottom: 2.5rem;
+  }
+
+  .name {
+    font-family: var(--serif);
+    font-size: 3.2rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -.02em;
+    margin-bottom: .35rem;
+  }
+
+  .title-line {
+    font-size: .8rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #669bea;
+  }
+
+  .title-line span {
+    color: var(--accent);
+  }
+
+  .contacts {
+    text-align: right;
+    font-size: .78rem;
+    color: var(--muted);
+    line-height: 2;
+  }
+
+  .contacts a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .15s;
+  }
+
+  .contacts a:hover { color: var(--accent); }
+
+  .contacts .site {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: .72rem;
+    color: var(--accent2);
+    letter-spacing: .03em;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-label {
+    font-size: .65rem;
+    font-weight: 500;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 0.5px;
+    background: var(--border2);
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    font-size: .95rem;
+    color: #b4b6be;
+    line-height: 1.75;
+    max-width: 680px;
+  }
+
+  .about strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── EXPERIENCE ── */
+  .job {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 0 1.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .job:last-child { border-bottom: none; }
+
+  .job-meta {
+    padding-top: .1rem;
+  }
+
+  .job-period {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: .4rem;
+  }
+
+  .job-company {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: .15rem;
+  }
+
+  .job-location {
+    font-size: .72rem;
+    color: var(--dim);
+  }
+
+  .job-role {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: .5rem;
+    color: var(--text);
+  }
+
+  .job-desc {
+    font-size: .95rem;
+    color: #bec0c4;
+    line-height: 1.65;
+    margin-bottom: .6rem;
+  }
+
+  .job-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: .5rem;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+    transition: border-color .2s;
+  }
+
+  .project-card:hover {
+    border-color: var(--dim);
+  }
+
+  .project-card.wide {
+    grid-column: span 2;
+  }
+
+  .project-name {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-bottom: .25rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  .project-sub {
+    font-size: .72rem;
+    color: var(--muted);
+    margin-bottom: .6rem;
+    font-family: var(--mono);
+  }
+
+  .project-desc {
+    font-size: .8rem;
+    color: #8a8c94;
+    line-height: 1.6;
+  }
+
+  /* ── STACK ── */
+  .stack-groups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .stack-group {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: 6px;
+    padding: .8rem 1rem;
+  }
+
+  .stack-group-label {
+    font-size: .62rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .5rem;
+  }
+
+  .stack-items {
+    font-size: .8rem;
+    color: #a2a4ad;
+    line-height: 1.7;
+  }
+
+  .stack-items .hi {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .stack-items .hi2 {
+    color: var(--accent2);
+    font-weight: 500;
+  }
+
+  /* ── TAGS ── */
+  .tag {
+    font-size: .7rem;
+    font-family: var(--mono);
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: #1a1b1f;
+    color: var(--muted);
+    border: 0.5px solid var(--border2);
+  }
+
+  /* ── BADGES ── */
+  .badge {
+    font-size: .8rem;
+    font-weight: 500;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .badge-green { background: #1a2e0d; color: var(--accent); border: 0.5px solid #3a5e1a; }
+  .badge-blue  { background: #0d1a2e; color: var(--accent2); border: 0.5px solid #1a3a5e; }
+  .badge-gray  { background: #1a1b1f; color: var(--muted); border: 0.5px solid var(--border2); }
+
+  /* ── EDUCATION & MISC ── */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .meta-block {
+    background: var(--surface);
+    border: 0.5px solid var(--border2);
+    border-radius: 6px;
+    padding: .8rem 1rem;
+  }
+
+  .meta-block-label {
+    font-size: .62rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .4rem;
+  }
+
+  .meta-block-val {
+    font-size: .85rem;
+    color: var(--text);
+    line-height: 1.55;
+  }
+
+  .meta-block-val small {
+    display: block;
+    font-size: .75rem;
+    color: var(--muted);
+    margin-top: .1rem;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .72rem;
+    color: var(--dim);
+    font-family: var(--mono);
+  }
+
+  /* ── DOT GRID BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, #2a2b3180 1px, transparent 1px);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── SECTION LINE DRAW ── */
+  .section-line {
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform .6s ease;
+  }
+  .section-line.drawn {
+    transform: scaleX(1);
+  }
+
+  /* ── PROJECT CARD HOVER ── */
+  .project-card {
+    transition: border-color .2s, transform .2s ease, box-shadow .2s ease;
+  }
+  .project-card:hover {
+    border-color: var(--dim);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(200, 240, 123, 0.08);
+  }
+
+  /* ── TAG HOVER ── */
+  .tag {
+    transition: color .15s, border-color .15s;
+    cursor: default;
+  }
+  .tag:hover {
+    color: var(--accent);
+    border-color: #3a5e1a;
+  }
+
+  /* ── STACK ITEM HIGHLIGHT ── */
+  .stack-group {
+    transition: border-color .2s;
+  }
+  .stack-group:hover {
+    border-color: var(--dim);
+  }
+
+  /* ── TYPEWRITER CURSOR ── */
+  .tw-cursor {
+    display: inline-block;
+    width: 2px;
+    height: .85em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blink .75s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    body::before { display: none; }
+    .page { padding: 1.5rem; }
+    :root {
+      --bg: #fff; --surface: #f5f5f5; --border: #ddd; --border2: #ccc;
+      --text: #111; --muted: #666; --dim: #999;
+      --accent: #3a7d00; --accent2: #1040a0;
+    }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .section-line { transform: scaleX(1); transition: none; }
+    .project-card:hover { transform: none; box-shadow: none; }
+    .tw-cursor { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header reveal">
+    <div>
+      <div class="name">Лебедев Роман</div>
+      <div class="title-line">
+        Python Backend Developer · <span>Tech Lead</span>
+      </div>
+    </div>
+    <div class="contacts">
+      <div>+7 (771) 464-87-17</div>
+      <div><a href="mailto:roman_lebedev91@mail.ru">roman_lebedev91@mail.ru</a></div>
+      <div><a href="https://t.me/RomanL1991" class="site">@RomanL1991</a></div>
+      <!-- <div>Казахстан · удалённо</div> -->
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section class="section reveal">
+    <div class="section-header">
+      <span class="section-label">О себе</span>
+      <div class="section-line"></div>
+    </div>
+    <p class="about">
+      Python backend-разработчик, 3,5+ года коммерческого опыта. Давно вышел за рамки "просто написать API" — погружаюсь в продукт, 
+      собираю требования, проектирую решение целиком и довожу до production. Делал e-commerce, логистику, CRM, внутренние платформы. 
+      Сейчас — multi-tenant SaaS и LLM-пайплайны. Открыт к предложениям.
+      <br>
+      Гражданство РФ. Последние 7 лет живу в РК, город Петропавловск. 
+    </p>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section reveal">
+    <div class="section-header">
+      <span class="section-label">Опыт</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="job">
+      <div class="job-meta">
+        <div class="job-period">Июнь 2024 —<br>настоящее время</div>
+        <div class="job-company">InstallBiz</div>
+        <div class="job-location">Казахстан</div>
+      </div>
+      <div>
+        <div class="job-role">Backend Developer · Tech Lead</div>
+        <div class="job-desc">
+          Единственный разработчик экосистемы Metis One (Tech Owner) — multi-tenant SaaS для управления строительными сметами.
+          Проектирую архитектуру, пишу весь backend, интегрирую LLM-пайплайны и внешние сервисы,
+          настраиваю инфраструктуру. Параллельно веду freelance-проекты под брендом InstallBiz:
+          vendor-приложения, каталоги, автоматизация бизнес-процессов.
+        </div>
+        <div class="job-tags">
+          <span class="tag">Django</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">django-tenants</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Redis</span>
+          <span class="tag">RabbitMQ</span>
+          <span class="tag">Meilisearch</span>
+          <span class="tag">OpenAI</span>
+          <span class="tag">Playwright</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-meta">
+        <div class="job-period">Июнь 2024 —<br>Сентябрь 2025</div>
+        <div class="job-company">SCK</div>
+        <div class="job-location">Казахстан</div>
+      </div>
+      <div>
+        <div class="job-role">Backend Developer</div>
+        <div class="job-desc">
+          Разработка серверной части для интернет-магазинов и CRM-систем.
+          Проектирование API, интеграции с внешними сервисами, автоматизация бизнес-процессов
+          (парсеры, отчёты, уведомления). Архитектурное проектирование и техническое руководство.
+        </div>
+        <div class="job-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Django</span>
+          <span class="tag">DRF</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Redis</span>
+          <span class="tag">Celery</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Nginx</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-meta">
+        <div class="job-period">Январь 2023 —<br>Июнь 2024</div>
+        <div class="job-company">Завод им. С.М. Кирова</div>
+        <div class="job-location">Казахстан</div>
+      </div>
+      <div>
+        <div class="job-role">Инженер-программист</div>
+        <div class="job-desc">
+          Разработка ПО для внутренних нужд предприятия и торговой реализации.
+          Ключевой проект — СКУД: система контроля и управления доступом с биометрией,
+          IP-контроллерами турникетов и real-time мониторингом через WebSocket.
+        </div>
+        <div class="job-tags">
+          <span class="tag">Django</span>
+          <span class="tag">Django Channels</span>
+          <span class="tag">WebSocket</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">face_recognition</span>
+          <span class="tag">Redis</span>
+          <span class="tag">PostgreSQL</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section reveal">
+    <div class="section-header">
+      <span class="section-label">Проекты</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-name">
+          Metis One
+          <span class="badge badge-green">Production</span>
+        </div>
+        <div class="project-sub">Django · django-tenants · DRF · PostgreSQL · Meilisearch</div>
+        <div class="project-desc">
+          Multi-tenant SaaS для управления строительными сметами. Импорт смет из Excel с автопарсингом,
+          техкарты с версионированием (живой черновик + immutable snapshot), трёхуровневый fallback-поиск
+          материалов, bulk upsert справочников без N+1. Signal-driven пересчёт стоимости, JSONB + GIN-индексы.
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-name">
+          TK AI Service
+          <span class="badge badge-blue">LLM Pipeline</span>
+        </div>
+        <div class="project-sub">FastAPI · OpenAI · RabbitMQ · Redis · anyio</div>
+        <div class="project-desc">
+          4-шаговый LLM-пайплайн генерации технических карт: черновик → параллельный поиск кандидатов
+          (asyncio.gather) → batch-выбор через LLM → сборка и публикация в RabbitMQ.
+          Command + DI factory + ABC-интерфейсы. Batch-режим с прогрессом через Redis Hash.
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-name">
+          Search Aggregator
+          <span class="badge badge-gray">Microservice</span>
+        </div>
+        <div class="project-sub">FastAPI · anyio · Playwright · Redis · MongoDB</div>
+        <div class="project-desc">
+          Параллельная агрегация поиска по поставщикам. OCP-провайдеры (BaseSearchProvider + Registry),
+          anyio TaskGroup с CapacityLimiter и глобальным дедлайном.
+          Playwright + Redis-сессия для headless-провайдера с анти-бот патчем.
+          Prometheus метрики + structlog с request_id через contextvars.
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-name">
+          Automatic Payment Linking
+          <span class="badge badge-green">Vendor App</span>
+        </div>
+        <div class="project-sub">FastAPI · МойСклад Vendor API · SQLAlchemy async</div>
+        <div class="project-desc">
+          Официальное приложение в маркетплейсе МойСклад. 3 стратегии привязки платежей к документам
+          (сумма+контрагент, распределение, regex-маска). JWT HS256 + JTI replay-защита.
+          Factory pattern multi-tenancy. Jinja2 UI в iframe, tenacity retry, идемпотентные upsert.
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-name">
+          Metronix
+          <span class="badge badge-gray">Freelance</span>
+        </div>
+        <div class="project-sub">Django Ninja · django-parler · django-mptt · orjson</div>
+        <div class="project-desc">
+          Мультиязычный каталог КИП (RU/KK). Builder + Assembler + Facade для продуктов.
+          MPTT-дерево категорий без N+1 (get_cached_trees). Полная гидрация товара одним пакетом Prefetch.
+          Провёл code review каждого модуля с REMARK.md (2 критических + N+1 + security).
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-name">
+          СКУД
+          <span class="badge badge-green">Production</span>
+        </div>
+        <div class="project-sub">Django Channels · WebSocket · OpenCV · face_recognition</div>
+        <div class="project-desc">
+          Система контроля доступа для завода. Собственный JSON-протокол с IP-контроллерами турникетов,
+          биометрия (2 режима: CV-стек + Macroscope), real-time мониторы охраны через WebSocket.
+          Каскадное управление доступом через Django signals.
+        </div>
+      </div>
+
+      <div class="project-card wide">
+        <div class="project-name">
+          NewsPortal — sko24.kz
+          <span class="badge badge-green">Production</span>
+        </div>
+        <div class="project-sub">Django · DRF · PostgreSQL FTS · Celery · django-parler · django-reversion</div>
+        <div class="project-desc">
+          CMS и REST API для новостного портала Северо-Казахстанской области. Мультиязычный контент (ru/kk/en),
+          полнотекстовый поиск с весами A/B/C + TrigramSimilarity, версионный кэш с автоинвалидацией через signals,
+          редакционный флоу (draft → scheduled → published), HMAC-превью до публикации, система баннеров с расписанием.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="section reveal">
+    <div class="section-header">
+      <span class="section-label">Стек</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="stack-groups">
+      <div class="stack-group">
+        <div class="stack-group-label">Языки и фреймворки</div>
+        <div class="stack-items">
+          <span class="hi">Python 3.11</span> · <span class="hi">Django 5</span> · <span class="hi">FastAPI</span><br>
+          Django REST Framework · Django Ninja<br>
+          Django Channels · ASGI/WSGI<br>
+          Celery · anyio · asyncio
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">Данные и инфраструктура</div>
+        <div class="stack-items">
+          <span class="hi">PostgreSQL</span> · <span class="hi">Redis</span> · <span class="hi">RabbitMQ</span><br>
+          JSONB · GIN · pg_trgm · FTS<br>
+          Meilisearch · MongoDB · SQLite<br>
+          SQLAlchemy 2.0 · Alembic · openpyxl
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">Архитектура и паттерны</div>
+        <div class="stack-items">
+          <span class="hi2">Clean Architecture</span> · CQRS<br>
+          Repository · Unit of Work<br>
+          Strategy · Factory · Command · DI<br>
+          Multi-tenant · Microservices
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">DevOps и инструменты</div>
+        <div class="stack-items">
+          <span class="hi">Docker</span> · Docker Compose<br>
+          Nginx · gunicorn · uvicorn<br>
+          Linux · Git · Bash<br>
+          Playwright · httpx · tenacity
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">Интеграции и AI</div>
+        <div class="stack-items">
+          <span class="hi2">OpenAI SDK</span> · Prompt engineering<br>
+          МойСклад Vendor API · JWT<br>
+          OpenCV · face_recognition<br>
+          Prometheus · structlog
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-group-label">Django экосистема</div>
+        <div class="stack-items">
+          django-tenants · django-parler<br>
+          django-mptt · django-reversion<br>
+          drf-spectacular · django-ninja<br>
+          Jinja2 · CKEditor 5 · orjson
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION & MISC -->
+  <section class="section reveal">
+    <div class="section-header">
+      <span class="section-label">Образование и прочее</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="meta-grid">
+      <div class="meta-block">
+        <div class="meta-block-label">Образование</div>
+        <div class="meta-block-val">
+          Омский государственный медицинский университет
+          <small>Медико-профилактическое дело · 2015</small>
+        </div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-block-label">Сертификаты</div>
+        <div class="meta-block-val">
+          Linux. Рабочая станция · 2023<br>
+          Основы Django Framework · 2022<br>
+          Основы языка Python · 2021
+          <small>Самообучение через реальные проекты с 2021</small>
+        </div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-block-label">Занятость и формат</div>
+        <div class="meta-block-val">
+          Полная занятость · удалённо<br>
+          Гибкий график · фриланс
+          <small>Казахстан / Россия · разрешение на работу в обеих странах</small>
+        </div>
+      </div>
+      <div class="meta-block">
+        <div class="meta-block-label">Языки</div>
+        <div class="meta-block-val">
+          Русский — родной<br>
+          Английский — технический (документация, код)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Лебедев Роман Александрович</span>
+    <span>-- 2026 --</span>
+  </footer>
+
+</div>
+
+<script>
+// ── SCROLL REVEAL ──
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── SECTION LINE DRAW ──
+const lineObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('drawn');
+      lineObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.section-line').forEach(el => lineObserver.observe(el));
+
+// ── TYPEWRITER ──
+(function () {
+  const el = document.querySelector('.title-line');
+  if (!el) return;
+
+  const part1 = 'Python Backend Developer · ';
+  const part2 = 'Tech Lead';
+
+  el.textContent = '';
+  const cursor = document.createElement('span');
+  cursor.className = 'tw-cursor';
+  el.appendChild(cursor);
+
+  let i = 0;
+  const speed = 38;
+
+  function typeChar() {
+    const full = part1 + part2;
+    if (i < full.length) {
+      const ch = full[i];
+      const isAccent = i >= part1.length;
+      const node = document.createTextNode(ch);
+
+      if (isAccent && i === part1.length) {
+        // wrap accent part in span
+        const span = document.createElement('span');
+        span.dataset.acc = '1';
+        el.insertBefore(span, cursor);
+      }
+
+      const acc = el.querySelector('[data-acc]');
+      if (isAccent && acc) acc.appendChild(node);
+      else el.insertBefore(node, cursor);
+
+      i++;
+      setTimeout(typeChar, speed);
+    } else {
+      // remove cursor after 2s
+      setTimeout(() => cursor.remove(), 2000);
+    }
+  }
+
+  // start after header reveal (~300ms)
+  setTimeout(typeChar, 350);
+})();
+</script>
+</body>
+</html>
