@@ -436,46 +436,65 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
+  /* ── RESPONSIVE: medium ── */
+  @media (max-width: 720px) {
+    .page { padding: 2rem 1.75rem 3rem; }
+
+    .name { font-size: 2.6rem; }
+
+    /* job — сужаем мета-колонку */
+    .job { grid-template-columns: 120px 1fr; }
+
+    /* stack — 2 колонки вместо 3 */
+    .stack-groups { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ── RESPONSIVE: small ── */
+  @media (max-width: 500px) {
     html { font-size: 13px; }
 
-    .page { padding: 1.5rem 1.25rem 3rem; }
+    .page { padding: 1.5rem 1.1rem 2.5rem; }
 
-    /* header — стопим в столбик */
-    .header {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-    .contacts { text-align: left; }
+    /* header — контакты уходят вниз */
+    .header { grid-template-columns: 1fr; gap: .85rem; }
+    .contacts { text-align: left; line-height: 1.75; }
+    .name { font-size: 2.2rem; }
 
-    .name { font-size: 2.4rem; }
-
-    /* job — стопим мету и контент */
+    /* job — мета становится компактной строкой */
     .job {
-      grid-template-columns: 1fr;
-      gap: .5rem;
+      display: block;
+      padding: 1rem 0;
     }
-    .job-meta { padding-top: 0; }
-    .job-period { font-size: .85rem; }
+    .job-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 .5rem;
+      margin-bottom: .5rem;
+    }
+    .job-period {
+      font-size: .75rem;
+      margin-bottom: 0;
+      white-space: nowrap;
+    }
+    .job-company { font-size: .95rem; margin-bottom: 0; }
+    .job-location { font-size: .7rem; }
 
-    /* projects — одна колонка */
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-    .project-card.wide {
-      grid-column: span 1;
-    }
+    /* projects — 2 колонки держим до 400px */
+    .project-card.wide { grid-column: span 2; }
 
     /* stack — одна колонка */
-    .stack-groups {
-      grid-template-columns: 1fr;
-    }
+    .stack-groups { grid-template-columns: 1fr; }
 
-    /* education — одна колонка */
-    .meta-grid {
-      grid-template-columns: 1fr;
-    }
+    /* footer */
+    .footer { flex-direction: column; gap: .3rem; align-items: flex-start; }
+  }
+
+  /* ── RESPONSIVE: xsmall ── */
+  @media (max-width: 400px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.wide { grid-column: span 1; }
+    .meta-grid { grid-template-columns: 1fr; }
   }
 
   @media print {
